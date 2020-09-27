@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossorigin="anonymous" />
+    <style>
+
+#carrousel {
+	margin-left: auto;
+	margin-right: auto;
+	color: #000;
+	padding-top: 32px;
+	/* background-color: #F5F0EC; */
+	margin-top: 15px;
+	position: relative;
+	padding-bottom: 5px;
+}
+
+	#carrousel .breve__intro {
+		padding-left: 16px;
+		padding-right: 16px;
+	}
+
+	#carrousel .slider {
+		overflow-y: hidden;
+		position: relative;
+		padding-left: 16px;
+		margin-bottom: 24px;
+	}
+
+	#carrousel .sliderWrapper {
+		position: relative;
+		overflow-x: scroll;
+		text-align: center;
+		scroll-behavior: smooth;
+		padding-bottom: 20px;
+		margin-bottom: -20px; /*Visually remove the horizotal scrollBar */
+	}
+
+@media (prefers-reduced-motion: reduce) {
+	#carrousel .sliderWrapper {
+		scroll-behavior: auto;
+	}
+}
+
+#carrousel .breve__titre {
+	font-size: 22px;
+	letter-spacing: 1.5px;
+	line-height: 28px;
+	color: #3A3443;
+	text-transform: uppercase;
+	font-family: "The Antiqua B",Georgia,Droid-serif,serif;
+	font-weight: 700;
+	margin-bottom: 14px;
+}
+
+#carrousel .breve__chapo {
+	font-size: 16px;
+	line-height: 22px;
+	max-width: 664px;
+	font-family: "Marr Sans",Helvetica,Arial,Roboto,sans-serif;
+	font-weight:400;
+	color: #3A3443;
+	margin-bottom: 22px;
+}
+
+#carrousel .listeLien {
+	border-left: none;
+	max-width: 1300px;
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	overflow: visible;
+	white-space: nowrap;
+	font-size: 0;
+	line-height: 0;
+	position: relative;
+	display: inline-block;
+	vertical-align: top;
+}
+
+#carrousel .lien {
+	width: 250px;
+	padding-right: 20px;
+	margin-right: 0;
+	position: relative;
+	display: inline-block;
+	border-bottom: none;
+	cursor: pointer;
+}
+	#carrousel .lien::after {
+		content: "";
+		position: absolute;
+		height: 163px;
+		bottom: 0;
+		left: 0;
+		right: 20px;
+		background-image: linear-gradient(180deg, rgba(18,17,22,0.00) 6%, #121115 86%);
+		z-index: 1;
+	}
+
+	#carrousel .lien__titre {
+		font-size: 20px;
+		letter-spacing: 0.4px;
+		line-height: 24px;
+		color: #fff;
+		font-family: "Marr Sans Condensed",DINCondensed-Bold,"Roboto Condensed","Arial Narrow",sans-serif;
+		font-weight: 600;
+		position: absolute;
+		width: 82%;
+		bottom: 12px;
+		left: 12px;
+		right: 32px;
+		text-align: left;
+		margin-left: auto;
+		margin-right: auto;
+		white-space: normal;
+		z-index: 2;
+		max-width: 100%;
+		transition: transform 0.2s;
+		margin-top: 0;
+		margin-bottom: 0;
+	}
+
+	#carrousel .lien img {
+		display: block;
+		max-width: 100%;
+	}
+
+#carrousel .navSlider {
+	display: none; 
+}
+
+/*
+	sliderMarks
+*/
+.sliderMarks {
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+}
+.sliderMarks div {
+	display: inline-block;
+	vertical-align: top;
+	width: 10px;
+	height: 10px;
+	margin-right: 8px;
+	border-radius: 50%;
+	border: 1px solid #3A3443;
+}
+	.sliderMarks div.active {
+		background-color: #3A3443;
+	}
+
+
+
+@media (min-width: 500px) {
+
+	#carrousel .sliderMarks {
+		display: none;
+	}
+
+	/*
+		
+		nav-slider
+
+	*/
+	.navSlider {
+		position: absolute;
+		cursor: pointer;
+		width: 50px;
+		height: 50px;
+		padding-top: 10px;
+		top: 50%;
+		-webkit-transform: translateY(-50%);
+		transform: translateY(-50%);
+		-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+		
+		align-items: center;
+		z-index: 4;
+	}
+		#carrousel .navSliderLeft {left: 0;}
+		#carrousel .navSliderRight {right: 0;}
+
+		#carrousel .slider.leftLocked .navSliderLeft,
+		#carrousel .slider.leftLocked::before,
+		#carrousel .slider.rightLocked .navSliderRight,
+		#carrousel .slider.rightLocked::after{
+			pointer-events: none;
+			opacity: 0;
+		}
+
+		#carrousel .navSlider svg {
+			width: 16px;
+			height: 27px;
+			margin-left: auto;
+			display: block;
+			margin-right: auto;
+		}
+}
+
+@media (min-width: 768px) {
+	#carrousel {
+		padding-top: 48px;
+	}
+
+	#carrousel .navSlider {
+		display: -webkit-flex; /* NEW */
+		display: flex;
+	}
+
+
+	#carrousel .breve__titre {
+		font-size: 30px;
+		letter-spacing: 2.4px;
+		font-weight: 400;
+		text-align: center;
+	}
+
+	#carrousel .breve__chapo {
+		margin-left: auto;
+		margin-right: auto;
+		text-align: center;
+		font-size: 18px;
+		line-height: 26px;
+		margin-bottom: 32px;
+	}
+
+}
+
+@media (min-width: 1100px) {
+	#carrousel .navSlider svg {
+			transition: transform 0.2s;
+			transition: transform 0.2s, -webkit-transform 0.2s;
+	}
+	#carrousel .navSlider:hover svg {
+		-webkit-transform: scale(1.2);
+		transform: scale(1.2);
+	}
+}
+
+@media (min-width: 1300px) {
+
+	#carrousel .navSlider {
+			width: 80px;
+			height: 80px;
+	}
+
+	#carrousel .slider {
+		padding-left: 0;
+	}
+
+	#carrousel .slider::before,
+	#carrousel .slider::after {
+		transition: opacity 0.2s;
+		z-index: 3;
+		position: absolute;
+		content: "";
+		top: 0;
+		bottom: 0;
+		width: 277px;
+		pointer-events: none;
+	}
+
+	#carrousel .slider::before {
+		left: 0;
+		background: linear-gradient(to left, rgba(245, 240, 236,0) 0%,rgba(245, 240, 236,1) 90.25%);
+	}
+
+	#carrousel .slider::after {
+		right: 0;
+		background: linear-gradient(to right, rgba(245, 240, 236,0) 0%,rgba(245, 240, 236,1) 90.25%);
+	}
+
+	#carrousel .overflowSlider .lien:last-child {
+		margin-right: 250px;
+	}
+
+	#carrousel .lien:hover .lien__titre {
+		transform: translateY(-5px);
+	}
+
+}
+
+html, body {margin: 0;}
+html {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+*, *:before, *:after {
+	-webkit-box-sizing: inherit;
+	-moz-box-sizing: inherit;
+	box-sizing: inherit;
+}
+
+
+/* General Styling and Structure
+--------------------------------------------------------------------------------*/
+
+html {
+  height: 100%;
+}
+
+body {
+	width: 100%;
+  color: #525252;
+  font-size: 14px;
+	font-family: 'Lato', Arial, sans-serif;
+	font-weight: 400;
+	line-height: 1;
+  background: #f2f6f7;
+  -webkit-font-smoothing: antialiased;
+  -moz-font-smoothing: antialiased;
+  -o-font-smoothing: antialiased;
+}
+
+/*** TestimonialS Slider - Free Weebly Widget by Baamboo Studio - Style 2 ***/
+.testimonial_slider_2{
+	width:100%;
+	border: 1px solid #ebebeb;
+	overflow:hidden;
+	box-sizing:border-box;
+	padding-bottom:30px;
+}
+.testimonial_slider_2 input {
+	display: none;
+}
+
+.testimonial_slider_2 #slide_2_1:checked ~ .boo_inner { margin-left:0; }
+.testimonial_slider_2 #slide_2_2:checked ~ .boo_inner { margin-left:-100%; }
+.testimonial_slider_2 #slide_2_3:checked ~ .boo_inner { margin-left:-200%; }
+.testimonial_slider_2 #slide_2_4:checked ~ .boo_inner { margin-left:-300%; }
+.testimonial_slider_2 .boo_inner {
+	width:400%;
+	-webkit-transform: translateZ(0);
+	-webkit-transition: all 800ms cubic-bezier(0.770, 0.000, 0.175, 1.000); 
+	-moz-transition: all 800ms cubic-bezier(0.770, 0.000, 0.175, 1.000); 
+    -ms-transition: all 800ms cubic-bezier(0.770, 0.000, 0.175, 1.000); 
+    -o-transition: all 800ms cubic-bezier(0.770, 0.000, 0.175, 1.000); 
+    transition: all 800ms cubic-bezier(0.770, 0.000, 0.175, 1.000); /* easeInOutQuart */
+
+	-webkit-transition-timing-function: cubic-bezier(0.770, 0.000, 0.175, 1.000); 
+	-moz-transition-timing-function: cubic-bezier(0.770, 0.000, 0.175, 1.000); 
+    -ms-transition-timing-function: cubic-bezier(0.770, 0.000, 0.175, 1.000); 
+    -o-transition-timing-function: cubic-bezier(0.770, 0.000, 0.175, 1.000); 
+    transition-timing-function: cubic-bezier(0.770, 0.000, 0.175, 1.000); /* easeInOutQuart */
+}
+.testimonial_slider_2 .slide_content{
+	width:25%;
+	float:left;
+}
+.testimonial_slider_2 #controls {
+	text-align:center;
+}
+.testimonial_slider_2 #controls label{
+	width:8px;
+	height:8px;
+	margin:0 2px;
+	display:inline-block;
+	background:#999; /* Change controls background color */
+	border-radius:4px;
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+}
+.testimonial_slider_2 #slide_2_1:checked ~ #controls label:nth-child(1), 
+.testimonial_slider_2 #slide_2_2:checked ~ #controls label:nth-child(2), 
+.testimonial_slider_2 #slide_2_3:checked ~ #controls label:nth-child(3), 
+.testimonial_slider_2 #slide_2_4:checked ~ #controls label:nth-child(4){
+	background:#000; /* Change controls background color when mouse click */
+}
+.testimonial_2 {
+	font-size: 16px !important;
+	color: #333; /* Change testimonial paragraph text color */
+	padding: 30px 30px 23px;
+}
+.content_2 {
+	position: relative;
+	padding-left: 30px;
+	margin-bottom: 30px;
+}
+.content_2:before,
+.content_2:after {
+	content: "";
+	height: 15px;
+	width: 19px;
+	position: absolute;
+}
+.content_2:before {
+	background: url(icon_testimonial_2_before.png) 0 0 no-repeat;
+	left: 0;
+}
+.content_2:after {
+	background: url(icon_testimonial_2_after.png) 0 0 no-repeat;
+	margin: 5px 10px;
+}
+.testimonial_2 p {
+	display: inline;
+}
+.author_2 {
+	margin-left: 30px;
+}
+.author_2 h3 {
+	color: #333; /* Change author text color */
+	font-size: 13px;
+	font-weight: 600px;
+	padding: 0 0 5px;
+}
+.author_2 h4 {
+	color: #333; /* Change author text color */
+	font-size: 12px;
+	font-weight: 400;
+	padding: 0 0 5px;
+}
+.author_2 h4 a {
+	color: #999; /* Change company text link color */
+	text-decoration: none;
+	position: relative;
+	padding-bottom: 1px;
+	overflow: hidden;
+	border-bottom: 1px solid;
+}
+.author_2 h4 a:after {
+	background: #999; /* Change company border link background color */
+	height: 1px;
+	content: "";
+	position: absolute;
+	left: 0;
+	bottom: -1px;
+	width: 0;
+	-o-transition: all .3s;
+	-moz-transition: all .3s;
+	-webkit-transition: all .3s;
+	transition: all .3s;
+}
+.author_2 h4 a:hover {
+	color: #000; /* Change company text link color when mouse over */
+	border: none;
+}
+.author_2 h4 a:hover:after {
+	border-color: #000;
+	width: 100%;
+}
+
+
+@media (max-width: 400px) {
+	#covidInfo {
+		display: none;
+	}
+}
+
+@media (min-width: 1000px) {
+	#aboutFoot {
+		margin-left: 80px;
+	}
+}
+
+#more {display: none;} 
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#"><img src="./images/logo.png" alt="logo"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+            	<div class="dropdown">
+            	    <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            	      Bangalore
+            	    </button>
+            	    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            	      <a class="dropdown-item" href="#">Action</a>
+            	      <a class="dropdown-item" href="#">Another action</a>
+            	      <a class="dropdown-item" href="#">Something else here</a>
+            	    </div>
+            	  </div>
+			  
+            	<input class="col-5 form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            	<div><span><i class="fa fa-shopping-cart m-2" aria-hidden="true"></i></span>Cart</div>
+				<button type="button" class="btn btn-danger mx-5">LOGIN/SIGNUP</button>
+			
+			</div>
+        </nav>
+
+          <div style="width: 100%; box-shadow: 0px 12px 4px 1px rgba(46, 114, 166, .5); border-radius: 50px; height: 100%; margin-top: 30px; margin-bottom: 30px;">
+            <div id="carouselExampleInterval" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                  <div class="carousel-item active" data-interval="10000">
+                    <img src="./images/carousal1.jpg" style="border-radius: 50px;" class="d-block w-100" alt="img1">
+                  </div>
+                  <div class="carousel-item" data-interval="2000">
+                    <img src="./images/carousal2.png"  style="border-radius: 50px;" class="d-block w-100" alt="img2">
+                  </div>
+                  <div class="carousel-item">
+                    <img src="./images/carousal3.png"  style="border-radius: 50px;" class="d-block w-100" alt="img3">
+                  </div>
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleInterval" role="button" data-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleInterval" role="button" data-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Next</span>
+                </a>
+              </div>
+			  <div class="mt-2 text-center" id="covidInfo" style="font-size: 12px;">Safety precautions during COVID-19. We’re taking additional steps and precautionary measures to protect our community from COVID-19. Know more </div>
+          </div>
+
+          <div class="row text-center mt-5">
+              <div class="col-lg-7 col-xl-7">
+                  <div class="row">
+                      <div class="col-12 col-md-6 col-lg-3 col-xl-3">
+                        <div class="border m-1">
+                          <img class="mt-2" src="./images/package.png" alt="pkg">
+                          <div class="mb-2">Packages</div>
+                        </div>
+                      </div>
+                      <div class="col-12 col-md-6 col-lg-3 col-xl-3">
+                          <div class="border m-1">
+                              <img class="mt-2" src="./images/furniture.png" alt="fur">
+                              <div class="my-2">Furniture</div>
+                          </div>
+                      </div>
+                      <div class="col-12 col-md-6 col-lg-3 col-xl-3">
+                          <div class="border m-1">
+                              <img class="mt-2" src="./images/appliance.png" alt="app">
+                              <div class="my-2">Appliances</div>
+                          </div>
+                      </div>
+                      <div class="col-12 col-md-6 col-lg-3 col-xl-3">
+                          <div class="border m-1">
+                              <img class="mt-2" src="./images/electronics.png" alt="ele">
+                              <div class="my-2">Electronics</div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-lg-5 col-xl-5">
+                  <div class="row">
+                      <div class="col-12 col-md-6 col-lg-4 col-xl-4">
+                          <div class="border m-1">
+                              <img class="mt-2" src="./images/fitness.png" alt="fit">
+                              <div class="my-2">Fitness</div>
+                          </div>
+                      </div>
+                      <div class="col-12 col-md-6 col-lg-4 col-xl-4">
+                          <div class="border m-1">
+                              <img class="mt-2" src="./images/wfhessentials.png" alt="wfh">
+                              <div class="mt-3 mb-2">WFH Essentials</div>
+                          </div>
+                      </div>
+                      <div class="col-12 col-md-6 col-lg-4 col-xl-4">
+                          <div class="border m-1">
+                              <img class="mt-2" src="./images/uptooff.png" alt="upt">
+                              <div class="mt-3 mb-2">UPTO 50% Off</div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+
+          <section id="carrousel">
+            <svg aria-hidden="true" style="display:none" xmlns="http://www.w3.org/2000/svg">
+          
+              <symbol id="icon-left-arrow" viewBox="0 0 29 46" version="1.1" >
+                  <g transform="translate(-42 -1615)" stroke="#3A3443" stroke-width="4" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline transform="translate(56.5 1638) rotate(-90) translate(-56.5 -1638)" points="36 1650 56.5 1626 67.581 1639 77 1650"/>
+                  </g>
+              </symbol>
+          
+              <symbol id="icon-right-arrow" viewBox="0 0 29 46" version="1.1" >
+                  <g transform="translate(-1349.000000, -1615.000000)" stroke="#3A3443" stroke-width="4" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline id="Path-Copy" transform="translate(1363.500000, 1638.000000) scale(-1, 1) rotate(-90.000000) translate(-1363.500000, -1638.000000) " points="1343 1650 1363.5 1626 1384 1650"></polyline>
+                  </g>
+              </symbol>
+            </svg>
+          
+            <div class="breve__intro">
+              <!-- <h1 class="breve__titre">Titre du slider</h1> -->
+              <!-- <p class="breve__chapo">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem consequuntur, culpa accusamus cumque placeat quam quas quos qui, ipsum adipisci quae alias dicta, facere possimus cupiditate! Doloribus tempore, fuga corporis.</p> -->
+                <div class="breve_chapo ml-3" style="line-height: 20px;">You'll love to <br>take this home</div>
+                <hr style="background-color: firebrick;" class="col-1 ml-3">
+            </div>
+            
+            <div class="slider leftLocked">
+              <div class="sliderWrapper mt-0">
+                <div class="listeLien">
+                   <a class="lien" href="#">
+                    <img src="https://p.rmjo.in/productSquare/zamuus6n-500x500.jpg">
+                    <h2 class="lien__titre">titre 1 Lorem ipsum dolor sit  elit. Impedit molestias,</h2>
+                   </a>
+                   <a class="lien" href="#">
+                    <img src="https://p.rmjo.in/productSquare/hs7hg508-500x500.jpg">
+                    <h2 class="lien__titre">titre 2 Lorem ipsum dolor sit amet, consectetur elit. Saepe id,</h2>
+                   </a>
+                   <a class="lien" href="#">
+                    <img src="https://p.rmjo.in/productSquare/djbfgoay-500x500.jpg">
+                    <h2 class="lien__titre">titre 3 Lorem ipsum dolor sit amet, consectetur elit. Nihil excepturi,</h2>
+                   </a>
+                   <a class="lien" href="#">
+                    <img src="https://p.rmjo.in/productSquare/lvtnqc0k-500x500.jpg">
+                    <h2 class="lien__titre">titre 4 Lorem ipsum dolor sit amet, consectetur elit. Fuga excepturi,</h2>
+                   </a>
+                   <a class="lien" href="#">
+                    <img src="https://p.rmjo.in/productSquare/q25wnwgm-500x500.jpg">
+                    <h2 class="lien__titre">titre 5 Lorem ipsum dolor sit amet, consectetur adipisicing. Amet perspiciatis pariatur</h2>
+                   </a>
+                   <a class="lien" href="#">
+                    <img src="https://p.rmjo.in/productSquare/q25wnwgm-500x500.jpg">
+                    <h2 class="lien__titre">titre 6 Lorem ipsum dolor sit amet, consectetur adipisicing. Omnis quibusdam non</h2>
+                   </a>
+                    <a class="lien" href="#">
+                     <img src="https://p.rmjo.in/productSquare/q25wnwgm-500x500.jpg">
+                     <h2 class="lien__titre">titre 4 Lorem ipsum dolor sit amet, consectetur elit. Fuga excepturi,</h2>
+                    </a>
+                    <a class="lien" href="#">
+                     <img src="https://p.rmjo.in/productSquare/q25wnwgm-500x500.jpg">
+                     <h2 class="lien__titre">titre 5 Lorem ipsum dolor sit amet, consectetur adipisicing. Amet perspiciatis pariatur</h2>
+                    </a>
+                    <a class="lien" href="#">
+                     <img src="https://p.rmjo.in/productSquare/q25wnwgm-500x500.jpg"">
+                     <h2 class="lien__titre">titre 6 Lorem ipsum dolor sit amet, consectetur adipisicing. Omnis quibusdam non</h2>
+                    </a>
+                    <!-- <a class="lien" href="#">
+                      <img src="https://via.placeholder.com/230x300">
+                      <h2 class="lien__titre">titre 6 Lorem ipsum dolor sit amet, consectetur adipisicing. Omnis quibusdam non</h2>
+                     </a> -->
+                </div>
+              </div>
+              <div class="navSlider navSliderLeft disabled">
+                <svg aria-hidden="true"><use xlink:href="#icon-left-arrow"></use></svg>
+              </div>
+              <div class="navSlider navSliderRight">
+                <svg aria-hidden="true"><use xlink:href="#icon-right-arrow"></use></svg>
+              </div>
+            </div>
+            
+            <div class="sliderMarks">
+            </div>
+            
+          
+          </section>
+
+
+
+          <div class="mt-1">
+            <div class="container">
+              <p class="lead ml-3" style="font-size: 16px; color: black; line-height: 20px;">There's more<br />to renting</p>
+              <hr class="col-1 ml-3" style="background-color: firebrick;">
+            </div>
+          </div>
+
+          <div class="row">
+              <div class="col-12 col-md-6 col-lg-4 col-xl-4">
+                  <img src="./images/pic1.png" class="mt-3" alt="img1">
+                  <h4 class="m-2 my-3">Finest-quality products</h4>
+                  <p class="text-muted m-2 mb-3">Quality matters to you, and us! That's why we do a strict quality-check for every product.</p>
+              </div>
+              <div class="col-12 col-md-6 col-lg-4 col-xl-4">
+                <img src="./images/pic2.png" class="mt-3" alt="img2">
+                <h4 class="m-2 my-3">Finest-quality products</h4>
+                <p class="text-muted m-2 mb-3">Quality matters to you, and us! That's why we do a strict quality-check for every product.</p>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4 col-xl-4">
+              <img src="./images/pic3.png" class="mt-3" alt="img3">
+              <h4 class="m-2 my-3">Finest-quality products</h4>
+              <p class="text-muted m-2 mb-3">Quality matters to you, and us! That's why we do a strict quality-check for every product.</p>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4 col-xl-4 mt-2">
+                <img src="./images/pic4.png" class="mt-3" alt="img4">
+                <h4 class="m-2 my-3">Finest-quality products</h4>
+                <p class="text-muted m-2 mb-3">Quality matters to you, and us! That's why we do a strict quality-check for every product.</p>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4 col-xl-4 mt-2">
+              <img src="./images/pic5.png" class="mt-3" alt="img5">
+              <h4 class="m-2 my-3">Finest-quality products</h4>
+              <p class="text-muted m-2 mb-3">Quality matters to you, and us! That's why we do a strict quality-check for every product.</p>
+          </div>
+          <div class="col-12 col-md-6 col-lg-4 col-xl-4 mt-2">
+            <img src="./images/pic6.png" class="mt-3" alt="img6">
+            <h4 class="m-2 my-3">Finest-quality products</h4>
+            <p class="text-muted m-2 mb-3">Quality matters to you, and us! That's why we do a strict quality-check for every product.</p>
+          </div>
+		</div>
+		
+
+
+		<div class="row mt-5">
+			<div class="col-12 col-md-3 col-lg-3 col-xl-3 mt-5">
+				<div class="mt-1">
+					<div class="container">
+					  <p class="lead ml-3" style="font-size: 16px; color: black; line-height: 20px;">Over 1.5 lac<br />happy subscriber</p>
+					  <hr class="col-1 ml-3" style="background-color: firebrick;">
+					  <p class="lead ml-3 text-muted" style="font-size: 16px; color: black; line-height: 20px;">Here's what they <br> have to say about <br> their RentoMojo <br> experience. </p>
+					</div>
+				</div>
+			</div>
+			<!-- Testimonial Slider from Baamboo Studio modified for The Mentor Group (http://www.mentor-group.com/clients--testimonials.html) -->
+			<!-- TestimonialS Slider - Free Weebly Widget by Baamboo Studio - Style 2 -->
+			<div class="col-12 col-md-9 col-lg-9 col-xl-9">
+				<div class="testimonial_slider_2">
+					<input type="radio" name="slider_2" id="slide_2_1" checked />
+					<input type="radio" name="slider_2" id="slide_2_2" />
+					<input type="radio" name="slider_2" id="slide_2_3" />
+					<input type="radio" name="slider_2" id="slide_2_4" />
+					<div class="boo_inner clearfix">
+						<div class="slide_content">
+							<div class="testimonial_2">
+								<div class="content_2">
+									<p>Susan, I had to leave the workshop early so I didn't get a chance to say goodby or thank you and Rod for the terrific job you did. I am assuming that Leilani will get you a copy of the evaluations which were all really great to excellent. I just want to acknowledge both of you for the work you have done to be able to have that conversation with people in the way you do. I fully appreciate what it takes to get outside all your personal concerns and issues to be able to create that kind of safe space and make that kind of difference with people. I have shared you with my friends and have provided your phone and address to my consulting friends who do business consulting. They were very interested as there isn't a resource like that that comes our way very often. Again, thank you for the contribution you made to my organization, and for your courage and stand for altering the conversation about LGBT's.</p>
+								</div>
+								<div class="author_2">
+									<h3>Karen Sweetland</h3>
+									<h4>Valley Medical Center, San Jose, CA</h4>
+								</div>
+							</div>
+						</div>
+						<div class="slide_content">
+							<div class="testimonial_2">
+								<div class="content_2">
+									<p>Susan is not only passionate about her work and purpose in the world, she has education and experience that empower her to be highly effective in everything that she pursues. We took several courses together during her career at Brite and it was clear that she was well acquainted with many fields including anthropology, sociology, history, queer theologies, and a number of multicultural studies. Together, we served on the Brite Student Association on which Susan always went beyond the rest of us to engage our student body with the social justice issues in the community around us. Susan’s sensitivity to the needs of others is a brilliant compliment to her justice work. I know of this sensitivity because we also served together as hospice volunteers. Susan is always willing to listen to the perspectives of others and open to sharing her experiences with others to uplift and encourage. She is generous, always giving much more than is given to her.</p>
+								</div>
+								<div class="author_2">
+									<h3>Leah Jordan</h3>
+									<h4> MDiv, Brite Divinity School</h4>
+								</div>
+							</div>
+						</div>
+						<div class="slide_content">
+							<div class="testimonial_2">
+								<div class="content_2">
+									<p>The messenger is the message, and in this very good book, we find important messages that sadden, excite and affirm us as people who celebrate both our sexuality and our spirituality. Unitarian Universalists should feel very proud of having created a safe harbor for those discarded by others, and also challenged to work harder to make its culture more welcoming and inclusive.</p>
+								</div>
+								<div class="author_2">
+									<h3>Brian McNaught</h3>
+									<h4>Author of <i>Gay Issues in the Workplace</i></h4>
+								</div>
+							</div>
+						</div>
+						<div class="slide_content">
+							<div class="testimonial_2">
+								<div class="content_2">
+									<p>These personal stories will persuade even the most cynical that religion can be a force that is fully accepting and transforming. Indeed, the fulfillment of religion’s true promise is found among those who have courageously spoken here.</p>
+								</div>
+								<div class="author_2">
+									<h3>Lee Barker</h3>
+									<h4>President and Professor of Ministry, Meadville Lombard Theological School</h4>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div id="controls">
+						<label for="slide_2_1"></label>
+						<label for="slide_2_2"></label>
+						<label for="slide_2_3"></label>
+						<label for="slide_2_4"></label>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+
+
+	</div>   
+		<div class="jumbotron jumbotron-fluid">
+			<div class="container">
+			  <div class="my-3" style="font-size: 20px; line-height: 20px;">Enjoy An Upgraded Lifestyle In Bangalore City On A Budget With RentoMojo!</div>
+			  <p>RentoMojo is a leading rental company with a pan-India presence. We offer furniture, appliances, and electronics on rent in Bangalore at an affordable monthly fee. When you choose to rent from us instead of buying from a store, you get to use the best products in the market and still save money!</p>
+				<br>
+				<p>Whether you have a home in Bangalore or have just rented a room here, you’ll find everything you need on our website. We offer top-quality furniture, appliances, and electronics, made by the most dependable, in-demand brands around. If you choose to rent from us, you will receive multiple rewards like free maintenance, free relocation, and damage waiver.</p>
+				<br>
+				<p>RentoMojo makes it effortless for you to rent from us. All you need to do is pick out the products you like, add them to your cart, and then check out. Our team will deliver your rental items directly to your home and also install them for you. We offer fast delivery to all parts of Bangalore, including locations such as Bangalore Bazaar, Malleswaram, Doorvavinagar, Bangalore Sub Foreign Post, and Agara.</p>
+				<span id="more">
+					<div class="my-3" style="font-size: 20px; line-height: 20px;">Enjoy An Upgraded Lifestyle In Bangalore City On A Budget With RentoMojo!</div>
+					  <p>RentoMojo is a leading rental company with a pan-India presence. We offer furniture, appliances, and electronics on rent in Bangalore at an affordable monthly fee. When you choose to rent from us instead of buying from a store, you get to use the best products in the market and still save money!</p>
+						<br>
+						<p>Whether you have a home in Bangalore or have just rented a room here, you’ll find everything you need on our website. We offer top-quality furniture, appliances, and electronics, made by the most dependable, in-demand brands around. If you choose to rent from us, you will receive multiple rewards like free maintenance, free relocation, and damage waiver.</p>
+						<br>
+						<p>RentoMojo makes it effortless for you to rent from us. All you need to do is pick out the products you like, add them to your cart, and then check out. Our team will deliver your rental items directly to your home and also install them for you. We offer fast delivery to all parts of Bangalore, including locations such as Bangalore Bazaar, Malleswaram, Doorvavinagar, Bangalore Sub Foreign Post, and Agara.</p>
+				</span>
+			</div>
+			<button style="border: gray; margin-left: 80px;" onclick="myFunction()" id="myBtn">Read more <i class="fa fa-arrow-right" aria-hidden="true"></i></button> 
+		</div>
+
+		<div class="row">
+			<div class="col-sm-12 col-md-6 col-lg-3 col-xl-3 p-3" style="line-height: 30px;">
+				<div id="aboutFoot">
+					<div style="color: black; line-height: 50px;">RENTOMOJO</div>
+					<div>About Us</div>
+					<div>Culture</div>
+					<div>Investors</div>
+					<div>Careers</div>
+					<div>Contact</div>
+					<div>Our Benefits</div>
+					<div>Sitemap</div>
+				</div>
+			</div>
+			<div class="col-sm-12 col-md-6 col-lg-3 col-xl-3 p-3" style="line-height: 30px;">
+				<div style="color: black; line-height: 50px;">INFORMATION</div>
+				<div>Blog</div>
+				<div>FAQs</div>
+				<div>Documents Required</div>
+				<div>Your Guide to a Smarter Living</div>
+			</div>
+			<div class="col-sm-12 col-md-6 col-lg-3 col-xl-3 p-3" style="line-height: 30px;">
+				<div style="color: black; line-height: 50px;">POLICIES</div>
+				<div>Shipping Policy</div>
+				<div>Cancellation & Return</div>
+				<div>Privacy Policy</div>
+				<div>Rental Terms & Conditions</div>
+				<div>Referral Terms & Conditions</div>
+			</div>
+			<div class="col-sm-12 col-md-6 col-lg-3 col-xl-3 p-3" style="line-height: 20px;">
+				<div style="color: black; line-height: 50px;">Need Help ?</div>
+				<div style="font-size: 15px;"><i class="fa fa-phone" aria-hidden="true"></i><span class="ml-2"></span>	1800 102 6601</div>
+				<div style="font-size: 15px;" class="ml-4">080 4687 2700</div>
+				<div class="mt-3"><i class="fa fa-paper-plane-o" aria-hidden="true"></i><span class="ml-2"></span> jo@rentomojo.com</div>
+				<div class="my-3"><button type="button" class="btn btn-outline-secondary">Chat with us</button></div>
+				<div style="color: black;">DOWNLOAD APP</div>
+			</div>
+		</div>
+		<div class="container"><hr></div>
+
+		<div class="flex-column-reverse flex-sm-column-reverse flex-md-row flex-lg-row d-flex justify-content-between">
+			<div class="p-4">© 2020. Edunetwork Pvt. Ltd. </div>
+			<div class="p-3">
+				<i style="font-size: 20px;" class="p-2 fa fa-facebook-official" aria-hidden="true"></i>
+				<i style="font-size: 20px;" class="p-2 fa fa-twitter-square" aria-hidden="true"></i>
+				<i style="font-size: 20px;" class="p-2 fa fa-linkedin-square" aria-hidden="true"></i>
+				<i style="font-size: 20px;" class="p-2 fa fa-youtube-play" aria-hidden="true"></i>
+				<i style="font-size: 20px;" class="p-2 fa fa-instagram" aria-hidden="true"></i>
+				<i style="font-size: 20px;" class="p-2 fa fa-dribbble" aria-hidden="true"></i>
+			</div>
+			<div class="p-4"><button class="text-muted" style="border: white;" onclick="topFunction()" id="topBtn" title="Go to top">Go up</button></div>
+		</div>
+
+
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+    <script>
+
+//Slider nav with arrows
+let slider = document.querySelector(".slider");
+let sliderWrapper = document.querySelector(".sliderWrapper");
+let navSliderButtons = document.querySelectorAll(".navSlider");
+let sliderSlides = document.querySelectorAll(".lien");
+let sliderWidth = document.querySelector(".listeLien").offsetWidth;
+let slideAmount = sliderSlides.length;
+let slideWidth = sliderSlides[0].offsetWidth;
+let trueSliderWidth = slideAmount * slideWidth;
+let screenWidth = window.innerWidth;
+let sliderMarksWrapper = document.querySelector(".sliderMarks");
+
+let supportsNativeSmoothScroll = 'scrollBehavior' in document.documentElement.style;
+
+
+for (let i = 0; i < slideAmount; i++) {
+	sliderMarksWrapper.innerHTML += "<div></div>";
+}
+
+let sliderMarks = sliderMarksWrapper.querySelectorAll(".sliderMarks div");
+
+
+if (trueSliderWidth >= screenWidth) {
+	slider.classList.add("overflowSlider");
+}
+
+for (let i = 0; i < navSliderButtons.length; i++) {
+	let nav = navSliderButtons[i];
+	let isRight = nav.classList.contains("navSliderRight");
+
+
+	nav.addEventListener("click", function() {
+		let currentScroll = sliderWrapper.scrollLeft;
+		let nearestSlide = Math.floor(currentScroll / slideWidth);
+		let posTargetOffset = 0;
+		let scrollLeftpx = 0;
+
+
+		if (isRight) {
+			posTargetOffset = 1;
+		} else {
+			if (
+				currentScroll % slideWidth == 0 ||
+				slideWidth % currentScroll == 0
+			)
+				posTargetOffset = -1;
+		}
+
+		scrollLeftpx = (nearestSlide + posTargetOffset) * slideWidth;
+
+		if (supportsNativeSmoothScroll) {
+			sliderWrapper.scrollTo(scrollLeftpx, 300);
+		} else {
+			scrollTo_poly(sliderWrapper, scrollLeftpx, 300);
+		}
+	});
+}
+
+
+// Detect slider scroll
+// Display or not arrows and gradient
+// Update slider points
+sliderWrapper.addEventListener('scroll', function() {
+	let distanceToRight = (trueSliderWidth - screenWidth - (sliderWidth - screenWidth) / 2) - this.scrollLeft;
+	let currentSlide = Math.floor((this.scrollLeft + screenWidth / 2) / 250);
+
+	for (let i = 0; i < sliderMarks.length; i++) {
+		sliderMarks[i].classList[(i != currentSlide ? "remove" : "add")]("active");
+	}
+
+	slider.classList[(this.scrollLeft == 0 ? "add" : "remove")]("leftLocked");
+	slider.classList[(distanceToRight <= 1 ? "add" : "remove")]("rightLocked");
+
+});
+
+window.addEventListener('resize', function() {
+	slider = document.querySelector(".slider");
+	screenWidth = sliderWrapper.offsetWidth;
+	slideAmount = sliderSlides.length;
+	slideWidth = sliderSlides[0].offsetWidth;
+	trueSliderWidth = slideAmount * slideWidth;
+	screenWidth = window.innerWidth;
+	sliderWrapper.scroll();
+
+	if (trueSliderWidth >= screenWidth) {
+		slider.classList.add("overflowSlider");
+	}
+});
+
+sliderWrapper.scroll();
+
+
+function scrollTo_poly(element, to = 0, duration = 1000, scrollToDone = null) {
+	const start = element.scrollLeft;
+	const change = to - start;
+	const increment = 20;
+	let currentTime = 0;
+
+	const animateScroll = (() => {
+
+		currentTime += increment;
+
+		const val = Math.easeInOutQuad(currentTime, start, change, duration);
+
+		element.scrollLeft = val;
+
+		if (currentTime < duration) {
+			setTimeout(animateScroll, increment);
+		} else {
+			if (scrollToDone) scrollToDone();
+		}
+	});
+
+	animateScroll();
+};
+
+Math.easeInOutQuad = function(t, b, c, d) {
+
+	t /= d / 2;
+	if (t < 1) return c / 2 * t * t + b;
+	t--;
+	return -c / 2 * (t * (t - 2) - 1) + b;
+};
+
+
+
+
+
+
+
+
+$(document).ready(function(){
+		pagenum = 1;
+		function AutoRotate() {
+		   var myele = null;
+		   var allElements = document.getElementsByTagName('label');
+		   for (var i = 0, n = allElements.length; i < n; i++) {
+			   var myfor = allElements[i].getAttribute('for');
+			   if ((myfor !== null) && (myfor == ('slide_2_' + pagenum))) {
+				   allElements[i].click();
+				   break;
+			   }
+		   }
+		   if (pagenum == 4) {
+			   pagenum = 1;
+		   } else {
+			   pagenum++;
+		   }
+		}
+		setInterval(AutoRotate, 5000);
+	});
+
+
+
+	function myFunction() {
+	//   var dots = document.getElementById("dots");
+	  var moreText = document.getElementById("more");
+	  var btnText = document.getElementById("myBtn");
+
+	  if (moreText.style.display === "none") {
+	    moreText.style.display = "inline";
+	    btnText.innerHTML = "Read less";
+	    // moreText.style.display = "none";
+	  } else {
+	    moreText.style.display = "none";
+	    btnText.innerHTML = "Read more";
+	    // moreText.style.display = "inline";
+	  }
+	} 
+
+
+
+
+
+
+
+	//Get the button:
+	topbutton = document.getElementById("topBtn");
+
+	// When the user scrolls down 20px from the top of the document, show the button
+	window.onscroll = function() {scrollFunction()};
+
+	function scrollFunction() {
+	  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+	    topbutton.style.display = "block";
+	  } else {
+	    topbutton.style.display = "none";
+	  }
+	}
+
+	// When the user clicks on the button, scroll to the top of the document
+	function topFunction() {
+	  document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+	}
+
+
+    </script>
+</body>
+</html>
